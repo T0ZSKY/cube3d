@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/01 15:20:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:54:33 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int argc, char **argv)
 	ft_parsing(argv[1], cube);
 	if (ft_check_closed_map(cube) == 0)
 		return (ft_error("map incorrect\n"), 1);
+	ft_print_map(cube);
 	ft_create_windows(cube);
 	//init la fenetre
 }
