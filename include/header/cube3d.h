@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/04 16:10:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 23:03:57 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_struct
 	char **map;
 	void    *mlx;
 	void    *win;
-	
+
 	char	*path_N;
 	char	*path_E;
 	char	*path_W;
