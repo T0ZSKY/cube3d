@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 07:26:09 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/03/31 20:28:51 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:37:01 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,33 @@ void ft_parsing(char *path, t_struct *cube)
 	}
 	cube->map[i] = NULL;
 	close(fd);
+}
+
+int ft_path_texture(t_struct *cube, char *path)
+{
+	int fd;
+	char *line;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (ft_error("error path"), 1);
+		while ((line = get_next_line(fd)) != NULL)
+		{
+			if (line[0] && line[1] && line[2])
+			{
+				if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
+					cube->path_N = line;
+				else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
+					cube->path_S = line;
+				else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
+					cube->path_W = line;
+				else if (line[0] == 'E' && line[1] == 'E' && line[2] == ' ')
+					cube->path_E = line;
+			}
+			free(line);
+		}
+	close(fd);
+	if (cube->path_N == NULL || cube->path_E == NULL || cube->path_S == NULL || cube->path_W == NULL)
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/03 15:54:33 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:32:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int main(int argc, char **argv)
 	if (ft_check_closed_map(cube) == 0)
 		return (ft_error("map incorrect\n"), 1);
 	ft_print_map(cube);
+	if (ft_path_texture(cube, argv[1]) == 0)
+		return (ft_error("path of assets not found\n"), 1);
+	// printf("\n assets nord : %s\n", cube->path_N);
 	ft_create_windows(cube);
 	//init la fenetre
 }

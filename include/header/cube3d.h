@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/01 15:28:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:28:47 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct s_struct
 	char **map;
 	void    *mlx;
 	void    *win;
+	char	*path_N;
+	char	*path_E;
+	char	*path_W;
+	char	*path_S;
 }	t_struct;
 
 void ft_error(char *str);
@@ -34,5 +38,6 @@ void ft_parsing(char *path, t_struct *cube);
 void ft_print_map(t_struct *cube);
 int ft_check_closed_map(t_struct *cube);
 void ft_create_windows(t_struct *cube);
+int ft_path_texture(t_struct *cube, char *path);
 
 #endif
