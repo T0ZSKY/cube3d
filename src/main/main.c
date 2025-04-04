@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/04 14:32:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:43:49 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	t_struct *cube;
 
 	(void)argv;
-	cube = malloc(sizeof(cube));
+	cube = malloc(sizeof(t_struct));
 	if (argc != 2)
 		return (ft_error("Error number argument incorrect\n"), 1);
 	if (verif_extension(argv[1]) == 1)
@@ -28,8 +28,7 @@ int main(int argc, char **argv)
 	if (ft_check_closed_map(cube) == 0)
 		return (ft_error("map incorrect\n"), 1);
 	ft_print_map(cube);
-	if (ft_path_texture(cube, argv[1]) == 0)
-		return (ft_error("path of assets not found\n"), 1);
+	ft_path_texture(cube, argv[1]);
 	// printf("\n assets nord : %s\n", cube->path_N);
 	ft_create_windows(cube);
 	//init la fenetre
