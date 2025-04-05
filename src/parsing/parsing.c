@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 07:26:09 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/05 00:30:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:42:44 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_init_map(t_struct *cube, char *path)
 	if (!cube->map)
 		return ;
 	cube->map[size] = NULL;
+	cube->map_height = size;
 }
 
 void	ft_parsing(char *path, t_struct *cube)

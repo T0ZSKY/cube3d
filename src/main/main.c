@@ -6,15 +6,18 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/05 00:23:44 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:45:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
+//le joueur = bob
+
 int	main(int argc, char **argv)
 {
 	t_struct	*cube;
+	// t_player	bob;
 
 	cube = malloc(sizeof(t_struct));
 	if (argc != 2)
@@ -32,5 +35,8 @@ int	main(int argc, char **argv)
 	ft_remove_back_path(cube);
 	if (ft_chech_assets(cube) == 0)
 		return (ft_error("bad path assets\n"), 1);
+	ft_set_max(cube);
+	printf("\nhauteur de la map : %d\n", cube->map_height);
+	printf("\nlargeur de la map : %d\n", cube->map_width);
 	ft_create_windows(cube);
 }
