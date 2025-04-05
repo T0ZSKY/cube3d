@@ -6,15 +6,15 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 20:08:38 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/03/31 20:55:13 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:21:51 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-int ft_check_top_border(t_struct *cube)
+int	ft_check_top_border(t_struct *cube)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cube->map[0][i] && cube->map[0][i] != '\n')
@@ -26,9 +26,9 @@ int ft_check_top_border(t_struct *cube)
 	return (1);
 }
 
-int ft_check_bottom_border(t_struct *cube, int i)
+int	ft_check_bottom_border(t_struct *cube, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (cube->map[i][j] && cube->map[i][j] != '\n')
@@ -40,9 +40,11 @@ int ft_check_bottom_border(t_struct *cube, int i)
 	return (1);
 }
 
-int ft_check_side_borders(t_struct *cube, int i)
+int	ft_check_side_borders(t_struct *cube, int i)
 {
-	int len = ft_strlen(cube->map[i]);
+	int	len;
+
+	len = ft_strlen(cube->map[i]);
 	if (len > 0 && cube->map[i][len - 1] == '\n')
 		len--;
 	if (cube->map[i][0] != '1' && cube->map[i][0] != ' ')
@@ -52,15 +54,20 @@ int ft_check_side_borders(t_struct *cube, int i)
 	return (1);
 }
 
-int ft_check_open_spaces(t_struct *cube, int i, int j)
+int	ft_check_open_spaces(t_struct *cube, int i, int j)
 {
-	int above_len = ft_strlen(cube->map[i - 1]);
-	if (cube->map[i - 1][above_len - 1] == '\n')
+	int	above_len;
+	int	below_len;
+
+	if (!cube->map[i - 1] || !cube->map[i + 1])
+		return (ft_error("Error: map open (missing line above/below)"), 0);
+	above_len = ft_strlen(cube->map[i - 1]);
+	if (above_len > 0 && cube->map[i - 1][above_len - 1] == '\n')
 		above_len--;
 	if (j >= above_len || cube->map[i - 1][j] == ' ' || cube->map[i - 1][j] == '\0')
 		return (ft_error("Error: map has an open space (top)"), 0);
-	int below_len = ft_strlen(cube->map[i + 1]);
-	if (cube->map[i + 1][below_len - 1] == '\n')
+	below_len = ft_strlen(cube->map[i + 1]);
+	if (below_len > 0 && cube->map[i + 1][below_len - 1] == '\n')
 		below_len--;
 	if (j >= below_len || cube->map[i + 1][j] == ' ' || cube->map[i + 1][j] == '\0')
 		return (ft_error("Error: map has an open space (bottom)"), 0);
@@ -71,10 +78,10 @@ int ft_check_open_spaces(t_struct *cube, int i, int j)
 	return (1);
 }
 
-int ft_check_closed_map(t_struct *cube)
+int	ft_check_closed_map(t_struct *cube)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	if (!ft_check_top_border(cube))

@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-WE ./path_to_the_west_texture
-EA ./path
-SO ./path
+NO ./include/assets/N.txt
+WE ./include/assets/W.txt
+EA ./include/assets/E.txt
+SO ./include/assets/S.txt
 
 F 220,100,0
 C 225,30,0

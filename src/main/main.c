@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/04 18:03:35 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:23:44 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_struct *cube;
+	t_struct	*cube;
 
-	(void)argv;
 	cube = malloc(sizeof(t_struct));
 	if (argc != 2)
 		return (ft_error("Error number argument incorrect\n"), 1);
@@ -29,8 +28,9 @@ int main(int argc, char **argv)
 		return (ft_error("map incorrect\n"), 1);
 	ft_print_map(cube);
 	if (ft_path_texture(cube, argv[1]) == 0)
-		return(ft_error("error path assets\n"), 1);
-	// printf("\n assets nord : %s\n", cube->path_N);
+		return (ft_error("error path assets missing\n"), 1);
+	ft_remove_back_path(cube);
+	if (ft_chech_assets(cube) == 0)
+		return (ft_error("bad path assets\n"), 1);
 	ft_create_windows(cube);
-	//init la fenetre
 }

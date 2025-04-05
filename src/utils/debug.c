@@ -6,15 +6,15 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:54:09 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/03/31 14:55:04 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/04 23:59:30 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-void ft_print_map(t_struct *cube)
+void	ft_print_map(t_struct *cube)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cube->map[i])

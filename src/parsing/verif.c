@@ -6,26 +6,26 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 07:08:25 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/03/31 14:29:28 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:23:06 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-int open_file(char *str)
+int	open_file(char *str)
 {
-	int fd;
+	int	fd;
 
-	fd=open(str, O_RDONLY);
+	fd = open(str, O_RDONLY);
 	if (fd < 0)
-		return -1;
+		return (-1);
 	close(fd);
 	return (0);
 }
 
-int verif_extension(char *str)
+int	verif_extension(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

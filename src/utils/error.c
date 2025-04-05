@@ -6,15 +6,15 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 07:02:44 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/03/26 07:03:36 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:00:10 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-void ft_error(char *str)
+void	ft_error(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
