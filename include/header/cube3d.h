@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/05 16:39:56 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/06 21:26:50 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 #include <fcntl.h>
 #include "../GNL/get_next_line.h"
 #include "../minilibx/mlx.h"
+#include <math.h>
 
 typedef struct s_player
 {
 	double x;        // Position X du joueur
 	double y;        // Position Y du joueur
-	double dir_x;    // Direction X 
+	double dir_x;    // Direction X
 	double dir_y;    // Direction Y
 }	t_player;
 
@@ -58,5 +59,8 @@ int ft_path_texture(t_struct *cube, char *path);
 int ft_chech_assets(t_struct *cube);
 void ft_remove_back_path(t_struct *cube);
 void ft_set_max(t_struct *cube);
+void	init_player(t_player *p, char **map);
+void	simple_raycast(t_player *p, char **map);
+void	draw_vertical_line(void *mlx, void *win, int x, int height, int win_height);
 
 #endif

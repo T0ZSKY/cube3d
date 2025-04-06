@@ -6,7 +6,7 @@
 #    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/04 23:19:44 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/04/06 21:22:41 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/utils/error.c $(SRC_DIR)/utils/debug.c \
        $(SRC_DIR)/parsing/verif.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/verif_map.c \
        $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
-       $(SRC_DIR)/graphic/windows.c $(SRC_DIR)/utils/utils.c
+       $(SRC_DIR)/graphic/windows.c $(SRC_DIR)/utils/utils.c $(SRC_DIR)/graphic/init_player.c \
+	   $(SRC_DIR)/graphic/raycasting.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
