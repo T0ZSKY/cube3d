@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
+#    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/06 21:22:41 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/04/07 16:16:31 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 # Compilation settings
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR) -I$(MLX_DIR)
-LDFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+LDFLAGS = -L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz
 
 #macos
 #-L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz

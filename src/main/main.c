@@ -3,24 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/06 21:36:13 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:09:30 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
 //le joueur = bob
+void	render_scene(t_player *bob, t_struct *cube)
+{
+	int	x;
+
+	x = 0;
+	mlx_clear_window(cube->mlx, cube->win);
+	while (x < WIDTH)
+	{
+		raycast_column(bob, cube, x);
+		x++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
 	t_struct	*cube;
 	t_player	*bob;
+	t_context *ctx;
 
 	cube = malloc(sizeof(t_struct));
 	bob = malloc(sizeof(t_player));
+	ctx = malloc(sizeof(t_context));
+	ctx->p = bob;
+	ctx->cube = cube;
+	
 	if (argc != 2)
 		return (ft_error("Error number argument incorrect\n"), 1);
 	if (verif_extension(argv[1]) == 1)
@@ -40,11 +57,12 @@ int	main(int argc, char **argv)
 	printf("\nhauteur de la map : %d\n", cube->map_height);
 	printf("\nlargeur de la map : %d\n", cube->map_width);
 	init_player(bob, cube->map);
-	simple_raycast(bob, cube->map);
 	ft_create_windows(cube);
 	if (!cube->mlx || !cube->win)
 		return (ft_error("mlx ou window NULL\n"), 1);
 	printf("MLX OK, WIN OK\n");
-	draw_vertical_line(cube->mlx, cube->win, 800 / 2, 200, 600);
+
+	render_scene(bob, cube);
+	mlx_hook(cube->win, 2, 1L << 0, handle_keypress, ctx);
 	mlx_loop(cube->mlx);
 }
