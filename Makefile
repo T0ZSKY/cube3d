@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+         #
+#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/07 23:13:40 by ilbonnev         ###   ########.fr        #
+#    Updated: 2025/04/07 23:50:11 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,14 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 # Compilation settings
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR) -I$(MLX_DIR)
-LDFLAGS = -L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz
-#linux
-#-L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+#-------------------ILAN--------------------------------------------------
+#LDFLAGS = -L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz
+#-----------------------------------tom---------------------
+LDFLAGS = -L$(MLX_DIR) -L/opt/X11/lib -lmlx -lXext -lX11 -lm -lz
+
+#tom
+#LDFLAGS = -L$(MLX_DIR) -L/opt/X11/lib -lmlx -lXext -lX11 -lm -lz
+
 
 # Colors
 YELLOW = \033[0;33m
