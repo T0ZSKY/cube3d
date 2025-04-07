@@ -3,41 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 17:09:30 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:13:31 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header/cube3d.h"
+#include "../include/header/cube3d.h"
 
-//le joueur = bob
+void	fill_background(t_struct *cube)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				draw_pixel(cube, x, y, 0x0087CEEB);
+			else
+				draw_pixel(cube, x, y, 0x00202020);
+		}
+	}
+}
+
 void	render_scene(t_player *bob, t_struct *cube)
 {
 	int	x;
 
-	x = 0;
-	mlx_clear_window(cube->mlx, cube->win);
-	while (x < WIDTH)
-	{
+	if (cube->img)
+		mlx_destroy_image(cube->mlx, cube->img);
+	cube->img = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
+	cube->img_data = mlx_get_data_addr(cube->img, &cube->bpp, &cube->size_line, &cube->endian);
+	fill_background(cube);
+	x = -1;
+	while (++x < WIDTH)
 		raycast_column(bob, cube, x);
-		x++;
-	}
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->img, 0, 0);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv) // TODO a normmer
 {
 	t_struct	*cube;
 	t_player	*bob;
-	t_context *ctx;
+	t_context	*ctx;
 
 	cube = malloc(sizeof(t_struct));
 	bob = malloc(sizeof(t_player));
 	ctx = malloc(sizeof(t_context));
 	ctx->p = bob;
 	ctx->cube = cube;
-	
 	if (argc != 2)
 		return (ft_error("Error number argument incorrect\n"), 1);
 	if (verif_extension(argv[1]) == 1)
@@ -61,7 +80,6 @@ int	main(int argc, char **argv)
 	if (!cube->mlx || !cube->win)
 		return (ft_error("mlx ou window NULL\n"), 1);
 	printf("MLX OK, WIN OK\n");
-
 	render_scene(bob, cube);
 	mlx_hook(cube->win, 2, 1L << 0, handle_keypress, ctx);
 	mlx_loop(cube->mlx);

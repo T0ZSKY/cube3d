@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:17:56 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/05 16:42:50 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:14:03 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ void	ft_remove_back_path(t_struct *cube)
 	}
 }
 
-
-void ft_set_max(t_struct *cube)
+void	ft_set_max(t_struct *cube)
 {
-	int i;
-	size_t max;
+	int		i;
+	size_t	max;
 
 	i = 0;
 	max = 0;
@@ -63,3 +62,10 @@ void ft_set_max(t_struct *cube)
 	}
 	cube->map_width = (int)max;
 }
+
+/*
+char	*get_color(char *color)
+{
+	
+}
+*/

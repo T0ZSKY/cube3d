@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/07 16:16:31 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/04/07 23:13:40 by ilbonnev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,12 @@ GNL_DIR = $(INC_DIR)/GNL
 OBJ_DIR = ./obj
 
 # Sources
-SRCS = $(SRC_DIR)/main/main.c \
+SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/utils/error.c $(SRC_DIR)/utils/debug.c \
        $(SRC_DIR)/parsing/verif.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/verif_map.c \
        $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
        $(SRC_DIR)/graphic/windows.c $(SRC_DIR)/utils/utils.c $(SRC_DIR)/graphic/init_player.c \
-	   $(SRC_DIR)/graphic/raycasting.c
+	   $(SRC_DIR)/graphic/raycasting.c $(SRC_DIR)/utils/maths.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -33,10 +33,6 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR) -I$(MLX_DIR)
 LDFLAGS = -L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz
-
-#macos
-#-L./include/minilibx -I./include/minilibx -lmlx -lXext -lX11 -lm -lz
-
 #linux
 #-L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
