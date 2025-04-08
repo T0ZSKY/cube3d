@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 23:13:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:33:13 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	render_scene(t_player *bob, t_struct *cube)
 	x = -1;
 	while (++x < WIDTH)
 		raycast_column(bob, cube, x);
+
+	draw_minimap(bob, cube);
+
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->img, 0, 0);
 }
 

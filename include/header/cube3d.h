@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 23:11:14 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:36:29 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define HEIGHT 600
 # define FOV 0.60
 # define ROT_SPEED 0.1
+
+#define MINIMAP_SCALE 15
+#define MINIMAP_RADIUS 50 // rayon de la minimap en pixels
 
 # define KEY_ESC    65307
 # define KEY_LEFT   65361
@@ -92,11 +95,17 @@ int		handle_keypress(int keycode, void *param);
 void	render_scene(t_player *bob, t_struct *cube);
 void	rotate_player(t_player *p, int keycode);
 
-/* maths.c */ 
+/* maths.c */
 double	power2(double x);
 double	get_distance(double x1, double y1, double x2, double y2);
 
 /* utils.c */
 char	*get_color(char *color);
+
+
+void	draw_minimap(t_player *p, t_struct *cube);
+
+
+void	draw_pixel(t_struct *cube, int x, int y, int color);
 
 #endif
