@@ -3,3 +3,5 @@
 *.dSYM
 .DS_Store
 .vscode
+obj
+include/.DS_Store

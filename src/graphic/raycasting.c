@@ -3,59 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/06 21:33:06 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:37:28 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-//raycasting wyp
-
-void	draw_vertical_line(void *mlx, void *win, int x, int height, int win_height)
+void	draw_pixel(t_struct *cube, int x, int y, int color)
 {
-	int y;
-	int start;
-	int end;
+	char	*dst;
 
-	start = (win_height / 2) - (height / 2);
-	end = (win_height / 2) + (height / 2);
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	dst = cube->img_data + (y * cube->size_line + x * (cube->bpp / 8));
+	*(unsigned int *)dst = color;
+}
 
+void	draw_vertical_line(t_struct *cube, int x, int height)
+{
+	int	start;
+	int	end;
+	int	y;
+
+	start = (HEIGHT / 2) - (height / 2);
+	end = (HEIGHT / 2) + (height / 2);
+	y = start;
 	if (start < 0)
 		start = 0;
-	if (end > win_height)
-		end = win_height;
-
-	y = start;
-
+	if (end > HEIGHT)
+		end = HEIGHT;
 	while (y < end)
 	{
-		if (x >= 0 && x < 800) // protection horizontale aussi
-			mlx_pixel_put(mlx, win, x, y, 0x00FFFFFF);
+		draw_pixel(cube, x, y, 0x00AA00FF);
 		y++;
 	}
 }
 
-void	simple_raycast(t_player *p, char **map)
+static void	init_ray_data(t_player *p, int screen_x, double *rx, double *ry)
 {
-	double	ray_x = p->dir_x;
-	double	ray_y = p->dir_y;
+	double	camera_x;
+	double	ray_angle;
 
-	double	pos_x = p->x;
-	double	pos_y = p->y;
+	camera_x = 2 * screen_x / (double)WIDTH - 1;
+	ray_angle = atan2(p->dir_y, p->dir_x) + camera_x * (M_PI / 4);
+	*rx = cos(ray_angle);
+	*ry = sin(ray_angle);
+}
 
+static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
+{
+	double	pos_x;
+	double	pos_y;
+	double	distance;
+
+	pos_x = p->x;
+	pos_y = p->y;
 	while (1)
 	{
-		pos_x += ray_x * 0.01;
-		pos_y += ray_y * 0.01;
-
-		if (map[(int)pos_y][(int)pos_x] == '1')
+		pos_x += rx * 0.01;
+		pos_y += ry * 0.01;
+		if (cube->map[(int)pos_y][(int)pos_x] == '1')
 		{
-			double dist = sqrt((pos_x - p->x) * (pos_x - p->x) + (pos_y - p->y) * (pos_y - p->y));
-			printf("Mur détecté à %.2f unités !\n", dist);
-			break ;
+			distance = get_distance(p->x, p->y, pos_x, pos_y);
+			return ((int)(HEIGHT / distance));
 		}
 	}
+	return (0);
+}
+
+void	raycast_column(t_player *p, t_struct *cube, int screen_x)
+{
+	double	rx;
+	double	ry;
+	int		line_height;
+
+	init_ray_data(p, screen_x, &rx, &ry);
+	line_height = wall_dist(p, cube, rx, ry);
+	draw_vertical_line(cube, screen_x, line_height);
 }
