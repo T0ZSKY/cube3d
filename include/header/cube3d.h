@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 16:20:27 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:05:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,27 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800
+# define HEIGHT 600
 # define FOV 0.60
 # define ROT_SPEED 0.1
 
-#define MINIMAP_SCALE 5
+#define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
+
+#define MOVE_SPEED 0.1
+
 
 # define KEY_ESC    65307
 # define KEY_LEFT   65361
 # define KEY_RIGHT  65363
 # define KEY_TAB	65289
+
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+
 
 typedef struct s_player
 {

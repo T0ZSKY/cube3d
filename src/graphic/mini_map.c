@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 16:26:27 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:26:07 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_minimap_fullscreen(t_player *p, t_struct *cube)
 			fill_square(cube, x * tile_size, y * tile_size, tile_size, color);
 			x++;
 		}
-		y++;
+		y++;	
 	}
 	int	player_x = (int)(p->x * tile_size);
 	int	player_y = (int)(p->y * tile_size);
@@ -60,13 +60,15 @@ void	draw_minimap_fullscreen(t_player *p, t_struct *cube)
 
 void	draw_minimap(t_player *p, t_struct *cube)
 {
-	int	x;
-	int	y;
-	int	world_x;
-	int i = -2;
-	int j;
-	int	world_y;
+	int	x, y;
+	int	world_x, world_y;
 	int	color;
+	int	i = -2;
+	int	j;
+
+	double	angle = atan2(p->dir_y, p->dir_x);
+	double	rotated_x;
+	double	rotated_y;
 
 	y = -MINIMAP_RADIUS;
 	while (y < MINIMAP_RADIUS)
@@ -76,37 +78,43 @@ void	draw_minimap(t_player *p, t_struct *cube)
 		{
 			if (x * x + y * y < MINIMAP_RADIUS * MINIMAP_RADIUS)
 			{
-				world_x = (int)(p->x + (float)x / MINIMAP_SCALE);
-				world_y = (int)(p->y + (float)y / MINIMAP_SCALE);
+				// rotation selon la direction du joueur
+				rotated_x = x * cos(angle) - y * sin(angle);
+				rotated_y = x * sin(angle) + y * cos(angle);
+
+				world_x = (int)(p->x + rotated_x / MINIMAP_SCALE);
+				world_y = (int)(p->y + rotated_y / MINIMAP_SCALE);
+
 				if (world_y >= 0 && world_y < cube->map_height
-					&& world_x >= 0 && cube->map[world_y][world_x] != '\0')
+					&& world_x >= 0 && world_x < cube->map_width
+					&& cube->map[world_y][world_x] != '\0')
 				{
 					if (cube->map[world_y][world_x] == '1')
 						color = 0xFFFFFF;
 					else
 						color = 0x000000;
-					draw_pixel(cube, 10 + MINIMAP_RADIUS + x,
-						10 + MINIMAP_RADIUS + y, color);
 				}
 				else
-				{
 					color = 0x000000;
-					draw_pixel(cube, 10 + MINIMAP_RADIUS + x,
-						10 + MINIMAP_RADIUS + y, color);
-				}
+
+				draw_pixel(cube, 10 + MINIMAP_RADIUS + x,
+					10 + MINIMAP_RADIUS + y, color);
 			}
 			x++;
 		}
 		y++;
 	}
+
+	// Dessine le joueur au centre de la minimap
 	while (i <= 2)
 	{
 		j = -2;
 		while (j <= 2)
 		{
-			draw_pixel(cube, 10 + MINIMAP_RADIUS + i, 10 + MINIMAP_RADIUS + j, 0xFF0000);
+			draw_pixel(cube, 10 + MINIMAP_RADIUS + i,
+				10 + MINIMAP_RADIUS + j, 0xFF0000);
 			j++;
 		}
 		i++;
-}
+	}
 }
