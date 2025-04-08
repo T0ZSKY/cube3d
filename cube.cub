@@ -3,8 +3,8 @@ WE ./include/assets/W.txt
 EA ./include/assets/E.txt
 SO ./include/assets/S.txt
 
-F 220,100,0
-C 225,30,0
+F 0,0,0
+C 135,206,235
 
 111111
 100101

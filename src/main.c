@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 23:13:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:59:17 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	fill_background(t_struct *cube)
 		while (++x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				draw_pixel(cube, x, y, 0x0087CEEB);
+				draw_pixel(cube, x, y, cube->color.sky);
 			else
-				draw_pixel(cube, x, y, 0x00202020);
+				draw_pixel(cube, x, y, cube->color.floor);
 		}
 	}
 }

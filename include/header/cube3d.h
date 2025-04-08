@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 23:11:14 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:49:05 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct s_player
     double plane_y;  // Ajoute cette ligne
 }	t_player;
 
+typedef struct color
+{
+	unsigned int	floor;
+	unsigned int	wall;
+	unsigned int	 sky;
+}	t_color;
+
 typedef struct s_struct
 {
 	char	**map;
@@ -55,8 +62,8 @@ typedef struct s_struct
 	char	*path_W;
 	char	*path_S;
 
-	char	*color_F;
-	char	*color_C;
+	t_color	color;
+	
 	void	*img;
 	char	*img_data;
 
@@ -87,7 +94,7 @@ void 	ft_set_max(t_struct *cube);
 void	init_player(t_player *p, char **map);
 void	raycast_column(t_player *p, t_struct *cube, int screen_x);
 void	draw_vertical_line(t_struct *cube, int x, int height);
-void	draw_pixel(t_struct *cube, int x, int y, int color);
+void	draw_pixel(t_struct *cube, int x, int y, unsigned int color);
 int		handle_keypress(int keycode, void *param);
 void	render_scene(t_player *bob, t_struct *cube);
 void	rotate_player(t_player *p, int keycode);
@@ -97,6 +104,7 @@ double	power2(double x);
 double	get_distance(double x1, double y1, double x2, double y2);
 
 /* utils.c */
-char	*get_color(char *color);
+unsigned int	get_color(char *code);
+
 
 #endif
