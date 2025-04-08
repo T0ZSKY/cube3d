@@ -21,8 +21,6 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
-# define WIDTH 800
-# define HEIGHT 600
 # define WIDTH 1920
 # define HEIGHT 1080
 # define FOV 0.60
