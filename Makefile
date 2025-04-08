@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
+#    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/07 23:50:11 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/04/08 13:41:22 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/parsing/verif.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/verif_map.c \
        $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
        $(SRC_DIR)/graphic/windows.c $(SRC_DIR)/utils/utils.c $(SRC_DIR)/graphic/init_player.c \
-	   $(SRC_DIR)/graphic/raycasting.c $(SRC_DIR)/utils/maths.c
+	   $(SRC_DIR)/graphic/raycasting.c $(SRC_DIR)/utils/maths.c $(SRC_DIR)/graphic/mini_map.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

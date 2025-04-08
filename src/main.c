@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/08 00:59:17 by ilbonnev         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/08 13:39:28 by tomlimon         ###   ########.fr       */
+>>>>>>> origin/tom
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +43,17 @@ void	render_scene(t_player *bob, t_struct *cube)
 		mlx_destroy_image(cube->mlx, cube->img);
 	cube->img = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
 	cube->img_data = mlx_get_data_addr(cube->img, &cube->bpp, &cube->size_line, &cube->endian);
-	fill_background(cube);
-	x = -1;
-	while (++x < WIDTH)
-		raycast_column(bob, cube, x);
+	if (cube->full_screen == 0)
+	{
+		fill_background(cube);
+		x = -1;		
+		while (++x < WIDTH)
+			raycast_column(bob, cube, x);
+		draw_minimap(bob, cube);
+	}
+	else
+		draw_minimap_fullscreen(bob, cube);
+
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->img, 0, 0);
 }
 
@@ -57,6 +68,7 @@ int	main(int argc, char **argv) // TODO a normmer
 	ctx = malloc(sizeof(t_context));
 	ctx->p = bob;
 	ctx->cube = cube;
+	cube->full_screen = 0;
 	if (argc != 2)
 		return (ft_error("Error number argument incorrect\n"), 1);
 	if (verif_extension(argv[1]) == 1)

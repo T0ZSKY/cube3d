@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/08 23:58:40 by ilbonnev         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/08 16:21:45 by tomlimon         ###   ########.fr       */
+>>>>>>> origin/tom
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +61,28 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 {
 	double	pos_x;
 	double	pos_y;
-	double	distance;
+	double	raw_dist;
+	double	cos_angle;
+	double	corrected_dist;
 
 	pos_x = p->x;
 	pos_y = p->y;
+
 	while (1)
 	{
 		pos_x += rx * 0.01;
 		pos_y += ry * 0.01;
 		if (cube->map[(int)pos_y][(int)pos_x] == '1')
 		{
-			distance = get_distance(p->x, p->y, pos_x, pos_y);
-			return ((int)(HEIGHT / distance));
+			raw_dist = get_distance(p->x, p->y, pos_x, pos_y);
+			cos_angle = rx * p->dir_x + ry * p->dir_y;
+			corrected_dist = raw_dist * cos_angle;
+			return ((int)(HEIGHT / corrected_dist));
 		}
 	}
 	return (0);
 }
+
 
 void	raycast_column(t_player *p, t_struct *cube, int screen_x)
 {

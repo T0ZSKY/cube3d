@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 23:49:05 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/09 00:06:25 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 # define FOV 0.60
 # define ROT_SPEED 0.1
+
+#define MINIMAP_SCALE 5
+#define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
 
 # define KEY_ESC    65307
 # define KEY_LEFT   65361
 # define KEY_RIGHT  65363
-
+# define KEY_TAB	65289
 
 typedef struct s_player
 {
@@ -71,6 +76,8 @@ typedef struct s_struct
 	int		size_line;
 	int		endian;
 
+
+	int		full_screen;
 }	t_struct;
 
 typedef struct s_context
@@ -99,12 +106,23 @@ int		handle_keypress(int keycode, void *param);
 void	render_scene(t_player *bob, t_struct *cube);
 void	rotate_player(t_player *p, int keycode);
 
-/* maths.c */ 
+/* maths.c */
 double	power2(double x);
 double	get_distance(double x1, double y1, double x2, double y2);
 
 /* utils.c */
 unsigned int	get_color(char *code);
+
+
+
+void	draw_minimap(t_player *p, t_struct *cube);
+
+
+void	draw_pixel(t_struct *cube, int x, int y, int color);
+
+void	draw_minimap_fullscreen(t_player *p, t_struct *cube);
+
+void	fill_square(t_struct *cube, int start_x, int start_y, int size, int color);
 
 
 #endif
