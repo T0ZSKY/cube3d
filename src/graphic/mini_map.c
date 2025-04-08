@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 23:26:07 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 00:25:49 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
-
 
 void	draw_minimap_fullscreen(t_player *p, t_struct *cube)
 {
