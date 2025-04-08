@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:17:56 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/07 23:14:03 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/09 00:01:20 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,26 @@ void	ft_set_max(t_struct *cube)
 	cube->map_width = (int)max;
 }
 
-/*
-char	*get_color(char *color)
+unsigned int	get_color(char *code)
 {
-	
+	unsigned int	i;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	i = 0;
+	r = 0;
+	g = 0;
+	b = 0;
+	while (code[i] == ' ')
+		i++;
+	while (code[i] && code[i] != ',')
+		r = r * 10 + (code[i++] - '0');
+	i++;
+	while (code[i] && code[i] != ',')
+		g = g * 10 + (code[i++] - '0');
+	i++;
+	while (code[i] && code[i] != '\n' && code[i] != '\0')
+		b = b * 10 + (code[i++] - '0');
+	return ((0x37 << 24) | (r << 16) | (g << 8) | b);
 }
-*/
