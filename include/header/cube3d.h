@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 12:36:29 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:20:27 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 # define FOV 0.60
 # define ROT_SPEED 0.1
 
-#define MINIMAP_SCALE 15
-#define MINIMAP_RADIUS 50 // rayon de la minimap en pixels
+#define MINIMAP_SCALE 5
+#define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
 
 # define KEY_ESC    65307
 # define KEY_LEFT   65361
 # define KEY_RIGHT  65363
-
+# define KEY_TAB	65289
 
 typedef struct s_player
 {
@@ -67,6 +67,8 @@ typedef struct s_struct
 	int		size_line;
 	int		endian;
 
+
+	int		full_screen;
 }	t_struct;
 
 typedef struct s_context
@@ -107,5 +109,10 @@ void	draw_minimap(t_player *p, t_struct *cube);
 
 
 void	draw_pixel(t_struct *cube, int x, int y, int color);
+
+void	draw_minimap_fullscreen(t_player *p, t_struct *cube);
+
+void	fill_square(t_struct *cube, int start_x, int start_y, int size, int color);
+
 
 #endif
