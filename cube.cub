@@ -3,8 +3,8 @@ WE ./include/assets/W.xpm
 EA ./include/assets/E.xpm
 SO ./include/assets/S.xpm
 
-F 60,60,60
-C 135,206,235
+F 20,12,1
+C 2,5,41
 
 1111111111111111111111111
 1000000000110000000000001

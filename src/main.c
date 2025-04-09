@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 22:48:13 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 23:01:13 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ void ft_texture(t_texture *texture, t_struct *cube)
     int width = 600;
     int height = 600;
     texture->imgN = mlx_xpm_file_to_image(cube->mlx, cube->path_N, &width, &height);
-    
-    if (!texture->imgN) {
-        ft_error("Error loading texture image.\n");
-        return;
-    }
+    texture->imgE = mlx_xpm_file_to_image(cube->mlx, cube->path_N, &width, &height);
+    texture->imgS = mlx_xpm_file_to_image(cube->mlx, cube->path_N, &width, &height);
+    texture->imgW = mlx_xpm_file_to_image(cube->mlx, cube->path_N, &width, &height);
 
     texture->data = mlx_get_data_addr(texture->imgN, &texture->bpp, &texture->size_line, &texture->endian);
     

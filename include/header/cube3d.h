@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 22:49:02 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:33:17 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1000
+# define HEIGHT 1000
 # define FOV 0.60
 # define ROT_SPEED 0.1
 
@@ -108,6 +108,7 @@ typedef struct s_struct
 
 
 	int		full_screen;
+	
 }	t_struct;
 
 typedef struct s_context
@@ -156,7 +157,7 @@ int				handle_movement(int keycode, t_player *p, t_struct *cube);
 
 /* raycasting.c */
 void			draw_pixel(t_struct *cube, int x, int y, unsigned int color);
-void	draw_vertical_line(t_struct *cube, int x, int height, t_texture *texture);
+void draw_vertical_line(t_struct *cube, int x, int height, t_texture *texture, double wall_x);
 void	raycast_column(t_player *p, t_struct *cube, int screen_x, t_texture *texture);
 
 /* mini_map.c */
