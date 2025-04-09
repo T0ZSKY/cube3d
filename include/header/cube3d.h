@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 03:18:38 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:49:02 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 #define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
-
-#define MOVE_SPEED 0.1
 
 
 # define KEY_ESC    65307
@@ -58,6 +56,9 @@ typedef struct s_player
 	double dir_x;    // Direction X
 	double dir_y;    // Direction Y
 	double plane_x;  // Ajoute cette ligne
+	double speed;  // Vitesse normale
+    double run_speed;  // Vitesse en mode course
+    int is_running;  // Indicateur de mode course
     double plane_y;  // Ajoute cette ligne
 }	t_player;
 
@@ -67,6 +68,21 @@ typedef struct color
 	unsigned int	wall;
 	unsigned int	 sky;
 }	t_color;
+
+typedef struct s_texture
+{
+	void	*imgN;
+	void	*imgS;
+	void	*imgE;
+	void	*imgW;
+
+	char	*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_texture;
 
 typedef struct s_struct
 {
@@ -83,7 +99,6 @@ typedef struct s_struct
 	char	*path_S;
 
 	t_color	color;
-	
 	void	*img;
 	char	*img_data;
 
@@ -99,6 +114,7 @@ typedef struct s_context
 {
 	t_player	*p;
 	t_struct	*cube;
+	t_texture *texture;
 }	t_context;
 
 /* main.c */
@@ -135,13 +151,13 @@ int 			ft_chech_assets(t_struct *cube);
 /* windows.c */
 void 			ft_create_windows(t_struct *cube);
 int				handle_keypress(int keycode, void *param);
-void			render_scene(t_player *bob, t_struct *cube);
+void	render_scene(t_player *bob, t_struct *cube, t_texture *texture);
 int				handle_movement(int keycode, t_player *p, t_struct *cube);
 
 /* raycasting.c */
 void			draw_pixel(t_struct *cube, int x, int y, unsigned int color);
-void			draw_vertical_line(t_struct *cube, int x, int height);
-void			raycast_column(t_player *p, t_struct *cube, int screen_x);
+void	draw_vertical_line(t_struct *cube, int x, int height, t_texture *texture);
+void	raycast_column(t_player *p, t_struct *cube, int screen_x, t_texture *texture);
 
 /* mini_map.c */
 void			draw_minimap(t_player *p, t_struct *cube);

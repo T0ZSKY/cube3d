@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 02:43:34 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:48:13 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,44 @@ int	initialize_player_and_window(t_player *bob, t_struct *cube)
 	return (0);
 }
 
+void ft_texture(t_texture *texture, t_struct *cube)
+{
+    int width = 600;
+    int height = 600;
+    texture->imgN = mlx_xpm_file_to_image(cube->mlx, cube->path_N, &width, &height);
+    
+    if (!texture->imgN) {
+        ft_error("Error loading texture image.\n");
+        return;
+    }
+
+    texture->data = mlx_get_data_addr(texture->imgN, &texture->bpp, &texture->size_line, &texture->endian);
+    
+    if (!texture->data) {
+        ft_error("Error retrieving texture data.\n");
+        return;
+    }
+
+    texture->width = width;
+    texture->height = height;
+}
+
+
+
 int	main(int argc, char **argv)
 {
 	t_struct	*cube;
 	t_player	*bob;
 	t_context	*ctx;
+	t_texture	*texture;
 
 	cube = malloc(sizeof(t_struct));
 	bob = malloc(sizeof(t_player));
+	texture = malloc(sizeof(t_texture));
 	ctx = malloc(sizeof(t_context));
 	ctx->p = bob;
 	ctx->cube = cube;
+	ctx->texture = texture;
 	cube->full_screen = 0;
 	if (check_args(argc, argv))
 		return (1);
@@ -85,7 +112,8 @@ int	main(int argc, char **argv)
 	ft_set_max(cube);
 	if (initialize_player_and_window(bob, cube))
 		return (1);
-	render_scene(bob, cube);
+	ft_texture(texture, cube);
+	render_scene(bob, cube, texture);
 	mlx_hook(cube->win, 2, 1L << 0, handle_keypress, ctx);
 	mlx_loop(cube->mlx);
 }

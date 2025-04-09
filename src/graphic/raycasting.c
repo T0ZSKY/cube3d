@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 03:03:00 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:47:12 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,55 @@ void	draw_pixel(t_struct *cube, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_vertical_line(t_struct *cube, int x, int height)
+void draw_vertical_line(t_struct *cube, int x, int height, t_texture *texture)
 {
-	int	start;
-	int	end;
-	int	y;
+    int start;
+    int end;
+    int y;
+    int tex_x;  // Coordonnée x sur la texture
+    int tex_y;  // Coordonnée y sur la texture
+    unsigned int color;
 
-	start = (HEIGHT / 2) - (height / 2);
-	end = (HEIGHT / 2) + (height / 2);
-	y = start;
-	if (start < 0)
-		start = 0;
-	if (end > HEIGHT)
-		end = HEIGHT;
-	while (y < end)
-	{
-		draw_pixel(cube, x, y, 0x009400D3);
-		y++;
-	}
+    if (!texture || !texture->data) {
+        fprintf(stderr, "Erreur : texture ou texture->data est nul.\n");
+        return;
+    }
+
+    // Vérification des propriétés de la texture
+    if (texture->width <= 0 || texture->height <= 0 || texture->size_line <= 0 || texture->bpp <= 0) {
+        fprintf(stderr, "Erreur : propriétés de la texture invalides.\n");
+        return;
+    }
+
+    start = (HEIGHT / 2) - (height / 2);
+    end = (HEIGHT / 2) + (height / 2);
+    y = start;
+    if (start < 0)
+        start = 0;
+    if (end > HEIGHT)
+        end = HEIGHT;
+
+    // Calcul de la coordonnée x de la texture
+    tex_x = (x * texture->width) / WIDTH;
+    if (tex_x < 0) tex_x = 0;
+    if (tex_x >= texture->width) tex_x = texture->width - 1;
+
+    while (y < end)
+    {
+        // Calcul de la coordonnée y de la texture en fonction de la hauteur du mur
+        tex_y = (y - start) * texture->height / height;
+        if (tex_y < 0) tex_y = 0;
+        if (tex_y >= texture->height) tex_y = texture->height - 1;
+
+        // Récupérer la couleur de la texture
+        color = *(unsigned int *)(texture->data + (tex_y * texture->size_line + tex_x * (texture->bpp / 8)));
+
+        draw_pixel(cube, x, y, color);
+        y++;
+    }
 }
+
+
 
 static void	init_ray_data(t_player *p, int screen_x, double *rx, double *ry)
 {
@@ -78,7 +108,7 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 	return (0);
 }
 
-void	raycast_column(t_player *p, t_struct *cube, int screen_x)
+void	raycast_column(t_player *p, t_struct *cube, int screen_x, t_texture *texture)
 {
 	double	rx;
 	double	ry;
@@ -86,5 +116,5 @@ void	raycast_column(t_player *p, t_struct *cube, int screen_x)
 
 	init_ray_data(p, screen_x, &rx, &ry);
 	line_height = wall_dist(p, cube, rx, ry);
-	draw_vertical_line(cube, screen_x, line_height);
+	draw_vertical_line(cube, screen_x, line_height, texture);
 }
