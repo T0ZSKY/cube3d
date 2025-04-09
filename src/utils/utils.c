@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:17:56 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 00:27:34 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:16:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-void	fill_square(t_struct *cube, int start_x, int start_y, int size, int color)
+void	fill_square(t_struct *cube, int start_x, int start_y,
+	int size, int color)
 {
 	int	x;
 	int	y;
@@ -30,40 +31,24 @@ void	fill_square(t_struct *cube, int start_x, int start_y, int size, int color)
 	}
 }
 
+void	remove_newline(char *path)
+{
+	int	len;
+
+	if (path)
+	{
+		len = ft_strlen(path);
+		if (len > 0 && path[len - 1] == '\n')
+			path[len - 1] = '\0';
+	}
+}
 
 void	ft_remove_back_path(t_struct *cube)
 {
-	char	*path;
-	int		len;
-
-	path = cube->path_N;
-	if (path)
-	{
-		len = ft_strlen(path);
-		if (len > 0 && path[len - 1] == '\n')
-			path[len - 1] = '\0';
-	}
-	path = cube->path_S;
-	if (path)
-	{
-		len = ft_strlen(path);
-		if (len > 0 && path[len - 1] == '\n')
-			path[len - 1] = '\0';
-	}
-	path = cube->path_E;
-	if (path)
-	{
-		len = ft_strlen(path);
-		if (len > 0 && path[len - 1] == '\n')
-			path[len - 1] = '\0';
-	}
-	path = cube->path_W;
-	if (path)
-	{
-		len = ft_strlen(path);
-		if (len > 0 && path[len - 1] == '\n')
-			path[len - 1] = '\0';
-	}
+	remove_newline(cube->path_N);
+	remove_newline(cube->path_S);
+	remove_newline(cube->path_E);
+	remove_newline(cube->path_W);
 }
 
 void	ft_set_max(t_struct *cube)

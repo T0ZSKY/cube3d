@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 00:26:13 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:03:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 
 	pos_x = p->x;
 	pos_y = p->y;
-
 	while (1)
 	{
 		pos_x += rx * 0.01;
@@ -78,7 +77,6 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 	}
 	return (0);
 }
-
 
 void	raycast_column(t_player *p, t_struct *cube, int screen_x)
 {
