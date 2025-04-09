@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 20:08:38 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/05 00:21:51 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:09:27 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,19 @@ int	ft_check_open_spaces(t_struct *cube, int i, int j)
 	above_len = ft_strlen(cube->map[i - 1]);
 	if (above_len > 0 && cube->map[i - 1][above_len - 1] == '\n')
 		above_len--;
-	if (j >= above_len || cube->map[i - 1][j] == ' ' || cube->map[i - 1][j] == '\0')
+	if (j >= above_len || cube->map[i - 1][j] == ' '
+			|| cube->map[i - 1][j] == '\0')
 		return (ft_error("Error: map has an open space (top)"), 0);
 	below_len = ft_strlen(cube->map[i + 1]);
 	if (below_len > 0 && cube->map[i + 1][below_len - 1] == '\n')
 		below_len--;
-	if (j >= below_len || cube->map[i + 1][j] == ' ' || cube->map[i + 1][j] == '\0')
+	if (j >= below_len || cube->map[i + 1][j] == ' '
+			|| cube->map[i + 1][j] == '\0')
 		return (ft_error("Error: map has an open space (bottom)"), 0);
 	if (j > 0 && cube->map[i][j - 1] == ' ')
 		return (ft_error("Error: map has an open space (left)"), 0);
-	if (cube->map[i][j + 1] == ' ' || cube->map[i][j + 1] == '\n' || cube->map[i][j + 1] == '\0')
+	if (cube->map[i][j + 1] == ' ' || cube->map[i][j + 1] == '\n'
+			|| cube->map[i][j + 1] == '\0')
 		return (ft_error("Error: map has an open space (right)"), 0);
 	return (1);
 }

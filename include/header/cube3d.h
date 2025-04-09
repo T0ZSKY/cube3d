@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 23:05:14 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:18:38 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@
 #define KEY_D 100
 
 
+typedef struct s_minimap
+{
+	int	color;
+	int tile_size;
+	int start_x;
+	int start_y;
+}	t_minimap;
+
 typedef struct s_player
 {
 	double x;        // Position X du joueur
@@ -52,6 +60,13 @@ typedef struct s_player
 	double plane_x;  // Ajoute cette ligne
     double plane_y;  // Ajoute cette ligne
 }	t_player;
+
+typedef struct color
+{
+	unsigned int	floor;
+	unsigned int	wall;
+	unsigned int	 sky;
+}	t_color;
 
 typedef struct s_struct
 {
@@ -67,8 +82,8 @@ typedef struct s_struct
 	char	*path_W;
 	char	*path_S;
 
-	char	*color_F;
-	char	*color_C;
+	t_color	color;
+	
 	void	*img;
 	char	*img_data;
 
@@ -86,42 +101,58 @@ typedef struct s_context
 	t_struct	*cube;
 }	t_context;
 
-
-void 	ft_error(char *str);
-int 	verif_extension(char *str);
-int 	open_file(char *str);
-void 	ft_parsing(char *path, t_struct *cube);
-void 	ft_print_map(t_struct *cube);
-int 	ft_check_closed_map(t_struct *cube);
-void 	ft_create_windows(t_struct *cube);
-int 	ft_path_texture(t_struct *cube, char *path);
-int 	ft_chech_assets(t_struct *cube);
-void 	ft_remove_back_path(t_struct *cube);
-void 	ft_set_max(t_struct *cube);
-void	init_player(t_player *p, char **map);
-void	raycast_column(t_player *p, t_struct *cube, int screen_x);
-void	draw_vertical_line(t_struct *cube, int x, int height);
-void	draw_pixel(t_struct *cube, int x, int y, int color);
-int		handle_keypress(int keycode, void *param);
-void	render_scene(t_player *bob, t_struct *cube);
-void	rotate_player(t_player *p, int keycode);
+/* main.c */
+void	fill_background(t_struct *cube);
 
 /* maths.c */
-double	power2(double x);
-double	get_distance(double x1, double y1, double x2, double y2);
+double			power2(double x);
+double			get_distance(double x1, double y1, double x2, double y2);
 
 /* utils.c */
-char	*get_color(char *color);
+unsigned int	get_color(char *code);
+void 			ft_set_max(t_struct *cube);
+void 			ft_remove_back_path(t_struct *cube);
+void			fill_square(t_struct *cube, int start_x, int start_y, int size, int color);
 
+/* error.c */
+void 			ft_error(char *str);
 
-void	draw_minimap(t_player *p, t_struct *cube);
+/* debug.c */
+void 			ft_print_map(t_struct *cube);
 
+/* verif.c */
+int 			verif_extension(char *str);
+int 			open_file(char *str);
 
-void	draw_pixel(t_struct *cube, int x, int y, int color);
+/* verif_map.c */
+int 			ft_check_closed_map(t_struct *cube);
 
-void	draw_minimap_fullscreen(t_player *p, t_struct *cube);
+/* parsing.c */
+void 			ft_parsing(char *path, t_struct *cube);
+int 			ft_path_texture(t_struct *cube, char *path);
+int 			ft_chech_assets(t_struct *cube);
 
-void	fill_square(t_struct *cube, int start_x, int start_y, int size, int color);
+/* windows.c */
+void 			ft_create_windows(t_struct *cube);
+int				handle_keypress(int keycode, void *param);
+void			render_scene(t_player *bob, t_struct *cube);
+int				handle_movement(int keycode, t_player *p, t_struct *cube);
 
+/* raycasting.c */
+void			draw_pixel(t_struct *cube, int x, int y, unsigned int color);
+void			draw_vertical_line(t_struct *cube, int x, int height);
+void			raycast_column(t_player *p, t_struct *cube, int screen_x);
+
+/* mini_map.c */
+void			draw_minimap(t_player *p, t_struct *cube);
+void			draw_minimap_fullscreen(t_player *p, t_struct *cube);
+void			draw_player(t_player *p, t_struct *cube, int tile_size);
+int	get_minimap_color(t_player *p, t_struct *cube, double rotated_x, double rotated_y);
+void	draw_minimap_tile(t_player *p, t_struct *cube, double angle, int x, int y);
+void	draw_player_on_minimap(t_struct *cube);
+
+/* init_player.c */
+void			rotate_player(t_player *p, int keycode);
+void			init_player(t_player *p, char **map);
 
 #endif

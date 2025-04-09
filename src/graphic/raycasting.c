@@ -6,13 +6,13 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/08 16:21:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:03:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-void	draw_pixel(t_struct *cube, int x, int y, int color)
+void	draw_pixel(t_struct *cube, int x, int y, unsigned int color)
 {
 	char	*dst;
 
@@ -37,7 +37,7 @@ void	draw_vertical_line(t_struct *cube, int x, int height)
 		end = HEIGHT;
 	while (y < end)
 	{
-		draw_pixel(cube, x, y, 0x00AA00FF);
+		draw_pixel(cube, x, y, 0x009400D3);
 		y++;
 	}
 }
@@ -63,7 +63,6 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 
 	pos_x = p->x;
 	pos_y = p->y;
-
 	while (1)
 	{
 		pos_x += rx * 0.01;
@@ -78,7 +77,6 @@ static int	wall_dist(t_player *p, t_struct *cube, double rx, double ry)
 	}
 	return (0);
 }
-
 
 void	raycast_column(t_player *p, t_struct *cube, int screen_x)
 {
