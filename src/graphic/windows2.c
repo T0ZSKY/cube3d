@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 03:12:18 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 22:45:41 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:56:36 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int handle_keypress(int keycode, void *param)
     t_context *ctx;
     t_player *p;
     t_struct *cube;
-    t_texture *texture;  // Déclarez un pointeur vers la texture
+    t_texture *texture;
 
     ctx = (t_context *)param;
     p = ctx->p;
     cube = ctx->cube;
-    texture = ctx->texture;  // Récupère la texture depuis ctx
+    texture = ctx->texture;
 
     if (keycode == KEY_ESC)
         exit(0);
@@ -46,8 +46,6 @@ int handle_keypress(int keycode, void *param)
     
     if (keycode == KEY_TAB)
         cube->full_screen = !cube->full_screen;
-
-    // Appel de render_scene avec la texture récupérée depuis ctx
     render_scene(p, cube, texture);
 
     return (0);
