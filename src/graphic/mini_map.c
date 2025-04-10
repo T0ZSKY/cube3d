@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 01:34:26 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:55:01 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ void	draw_tile(t_struct *cube, int x, int y, int tile_size)
 {
 	int	color;
 
-	if (cube->fog_map[y][x] == '1')
-		color = 0xAAAAAA;
-	else if (cube->fog_map[y][x] == '0')
-		color = 0x000000;
-	else
-		color = 0x444444;
-	fill_square(cube, x * tile_size, y * tile_size, tile_size, color);
+	if (y >= 0 && y < cube->map_height && x >= 0 && x < (int)ft_strlen(cube->map[y]))
+	{
+		if (cube->fog_map[y][x] == '1')
+			color = 0xAAAAAA;
+		else if (cube->fog_map[y][x] == '0')
+			color = 0x000000;
+		else if (cube->fog_map[y][x] == '2')
+			color = 0x33312e;
+		else
+			color = 0x000000;
+		fill_square(cube, x * tile_size, y * tile_size, tile_size, color);
+	}
 }
 
 void	draw_minimap_f(t_struct *cube, int tile_size)
@@ -97,8 +102,10 @@ void	ft_fog_init(t_struct *cube)
 		b = 0;
 		while (cube->fog_map[a][b])
 		{
-			if (cube->fog_map[a][b] != '\0' && (cube->fog_map[a][b] == '1' || cube->fog_map[a][b] == '0'))
+			if (cube->fog_map[a][b] != '\0' && cube->fog_map[a][b] == '0')
 				cube->fog_map[a][b] = '0';
+			else if (cube->fog_map[a][b] != '\0' && cube->fog_map[a][b] == '1')
+				cube->fog_map[a][b] = '2';
 			b++;
 		}
 		a++;
@@ -126,7 +133,7 @@ void	update_fog_map(t_struct *cube, t_player *p)
 		{
 			wx = px + x;
 			wy = py + y;
-			if (wx >= 0 && wx < cube->map_width && wy >= 0 && wy < cube->map_height)
+			if (wy >= 0 && wy < cube->map_height && wx >= 0 && wx < (int)ft_strlen(cube->map[wy]))
 				cube->fog_map[wy][wx] = cube->map[wy][wx];
 			x++;
 		}
