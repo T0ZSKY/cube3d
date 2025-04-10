@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 03:01:14 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 03:01:37 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:02:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_tile_minimap(t_struct *cube, t_player *p, int x,
 	if (world_y >= 0 && world_y < cube->map_height && world_x >= 0
 		&& world_x < cube->map_width && cube->map[world_y][world_x] != '\0')
 	{
-		if (cube->map[world_y][world_x] == '1')
+		if (cube->fog_map[world_y][world_x] == '1')
 			color = 0xFFFFFF;
 		else
 			color = 0x000000;
@@ -80,6 +80,7 @@ void	draw_minimap(t_player *p, t_struct *cube)
 {
 	double	angle;
 
+	update_fog_map(cube, p);
 	angle = atan2(p->dir_y, p->dir_x) + M_PI_2;
 	draw_minimap_area(p, cube, angle);
 	draw_player_minimap(cube);
