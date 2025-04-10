@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 06:30:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 21:38:32 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:43:37 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	init_ray_data(t_player *p, int screen_x, double *rx, double *ry)
 	double	camera_x;
 
 	camera_x = 2 * screen_x / (double)WIDTH - 1;
-
 	*rx = p->dir_x + p->plane_x * camera_x;
 	*ry = p->dir_y + p->plane_y * camera_x;
 }
