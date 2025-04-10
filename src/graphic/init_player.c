@@ -6,27 +6,20 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:43:05 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 21:23:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:35:42 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/cube3d.h"
 
-void	rotate_player(t_player *p, int keycode)
+int	initialize_player_and_window(t_player *bob, t_struct *cube)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-	double	rot_speed;
-
-	rot_speed = ROT_SPEED;
-	if (keycode == KEY_LEFT)
-		rot_speed = -rot_speed;
-	old_dir_x = p->dir_x;
-	p->dir_x = p->dir_x * cos(rot_speed) - p->dir_y * sin(rot_speed);
-	p->dir_y = old_dir_x * sin(rot_speed) + p->dir_y * cos(rot_speed);
-	old_plane_x = p->plane_x;
-	p->plane_x = p->plane_x * cos(rot_speed) - p->plane_y * sin(rot_speed);
-	p->plane_y = old_plane_x * sin(rot_speed) + p->plane_y * cos(rot_speed);
+	init_player(bob, cube->map);
+	ft_create_windows(cube);
+	if (!cube->mlx || !cube->win)
+		return (ft_error("mlx ou window NULL\n"), 1);
+	printf("MLX OK, WIN OK\n");
+	return (0);
 }
 
 void	init_player(t_player *p, char **map)

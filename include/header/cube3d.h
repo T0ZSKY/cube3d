@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 21:39:41 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:41:42 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-# define FOV 1 // ne pas toucher
-# define ROT_SPEED 0.1
+# define FOV 0.86 
+# define ROT_SPEED 0.04
+# define SPEED 0.5
 
 #define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
@@ -39,6 +40,16 @@
 #define KEY_A 97
 #define KEY_S 115
 #define KEY_D 100
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
 
 typedef struct s_minimap
 {
@@ -93,6 +104,7 @@ typedef struct s_struct
     char    *path_E;
     char    *path_W;
     char    *path_S;
+	t_keys	keys;
     t_color color;
     void    *img;
     char    *img_data;
@@ -193,6 +205,8 @@ void 			ft_print_map(t_struct *cube);
 /* verif.c */
 int 			verif_extension(char *str);
 int 			open_file(char *str);
+int				check_args(int argc, char **argv);
+int				check_map_and_assets(t_struct *cube, char *map_path);
 
 /* verif_map.c */
 int 			ft_check_closed_map(t_struct *cube);
@@ -207,6 +221,7 @@ void 			ft_create_windows(t_struct *cube);
 int				handle_keypress(int keycode, void *param);
 void	render_scene(t_player *bob, t_struct *cube, t_texture *texture);
 int				handle_movement(int keycode, t_player *p, t_struct *cube);
+int		move_player_in_direction(t_player *p, t_struct *cube, double dir_x, double dir_y);
 
 /* mini_map.c */
 void			draw_minimap(t_player *p, t_struct *cube);
@@ -217,8 +232,8 @@ void	draw_minimap_tile(t_player *p, t_struct *cube, double angle, int x, int y);
 void	draw_player_on_minimap(t_struct *cube);
 
 /* init_player.c */
-void			rotate_player(t_player *p, int keycode);
 void			init_player(t_player *p, char **map);
+int			initialize_player_and_window(t_player *bob, t_struct *cube);
 
 /* raycasting.c */
 void	draw_pixel(t_struct *cube, int x, int y, unsigned int color);
@@ -240,6 +255,14 @@ void	calculate_wall_dist(t_ray_calc *calc, t_player *p, t_ray_dir *dir);
 int		wall_dist(t_raycast_params *params);
 void	init_ray_data(t_player *p, int screen_x, double *rx, double *ry);
 
+/* player_move.c */
+int		key_press(int keycode, t_context *ctx);
+int		key_release(int keycode, t_context *ctx);
+void	rotate_player(t_player *p, double angle);
+int		move_player(t_player *p, t_struct *cube, double new_x, double new_y);
+int		move_player_in_direction(t_player *p, t_struct *cube, double dir_x, double dir_y);
 
+/* textures.c */
+void	ft_texture(t_texture *texture, t_struct *cube);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 13:38:25 by tomlimon          #+#    #+#              #
-#    Updated: 2025/04/10 21:20:26 by ilbonnev         ###   ########.fr        #
+#    Updated: 2025/04/10 22:33:53 by ilbonnev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/graphic/windows.c $(SRC_DIR)/utils/utils.c $(SRC_DIR)/graphic/init_player.c \
 	   $(SRC_DIR)/graphic/raycasting.c $(SRC_DIR)/graphic/raycasting2.c $(SRC_DIR)/graphic/raycasting3.c \
 	   $(SRC_DIR)/utils/maths.c $(SRC_DIR)/graphic/mini_map.c $(SRC_DIR)/graphic/mini_map2.c \
-	   $(SRC_DIR)/graphic/windows2.c
+	   $(SRC_DIR)/graphic/player_move.c $(SRC_DIR)/graphic/textures.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
