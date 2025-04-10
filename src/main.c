@@ -23,14 +23,11 @@ void	handle_movement_loop(t_struct *cube, t_player *p)
 		move_player_in_direction(p, cube,
 			p->dir_x * (speed), p->dir_y * speed);
 	if (cube->keys.s)
-		move_player_in_direction(p, cube,
-			-p->dir_x * (speed * 0.5), -p->dir_y * speed);
+		move_player_in_direction(p, cube, -p->dir_x * (speed), -p->dir_y * speed);
 	if (cube->keys.a)
-		move_player_in_direction(p, cube,
-			-p->plane_x * (speed * 0.5), -p->plane_y * speed);
+		move_player_in_direction(p, cube, -p->plane_x * (speed), -p->plane_y * speed);
 	if (cube->keys.d)
-		move_player_in_direction(p, cube,
-			p->plane_x * (speed * 0.5), p->plane_y * speed);
+		move_player_in_direction(p, cube, p->plane_x * (speed), p->plane_y * speed);
 	if (cube->keys.left)
 		rotate_player(p, -rot_speed);
 	if (cube->keys.right)

@@ -26,6 +26,7 @@
 # define FOV 0.86
 # define ROT_SPEED 0.04
 # define SPEED 0.5
+# define MIN_DIST 0.1
 
 #define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
