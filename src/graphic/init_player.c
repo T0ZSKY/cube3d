@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:43:05 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 22:10:32 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:23:31 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	init_player(t_player *p, char **map)
 				p->x = x + 0.5;
 				p->y = y + 0.5;
 				p->speed = 1;
-    			p->run_speed = 2;
-    			p->is_running = 0;
+				p->run_speed = 2;
+				p->is_running = 0;
 				if (map[y][x] == 'N')
 				{
 					p->dir_x = 0;

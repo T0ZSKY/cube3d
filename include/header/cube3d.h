@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 01:33:17 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:39:41 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
-# define FOV 0.60
+# define WIDTH 1280
+# define HEIGHT 720
+# define FOV 1 // ne pas toucher
 # define ROT_SPEED 0.1
 
 #define MINIMAP_SCALE 10
@@ -40,83 +40,136 @@
 #define KEY_S 115
 #define KEY_D 100
 
-
 typedef struct s_minimap
 {
-	int	color;
-	int tile_size;
-	int start_x;
-	int start_y;
-}	t_minimap;
+    int color;
+    int tile_size;
+    int start_x;
+    int start_y;
+} t_minimap;
 
 typedef struct s_player
 {
-	double x;        // Position X du joueur
-	double y;        // Position Y du joueur
-	double dir_x;    // Direction X
-	double dir_y;    // Direction Y
-	double plane_x;  // Ajoute cette ligne
-	double speed;  // Vitesse normale
+    double x;          // Position X du joueur
+    double y;          // Position Y du joueur
+    double dir_x;      // Direction X
+    double dir_y;      // Direction Y
+    double plane_x;    // Plan X
+    double speed;      // Vitesse normale
     double run_speed;  // Vitesse en mode course
-    int is_running;  // Indicateur de mode course
-    double plane_y;  // Ajoute cette ligne
-}	t_player;
+    int is_running;    // Indicateur de mode course
+    double plane_y;    // Plan Y
+} t_player;
 
-typedef struct color
+typedef struct s_color
 {
-	unsigned int	floor;
-	unsigned int	wall;
-	unsigned int	 sky;
-}	t_color;
+    unsigned int floor;
+    unsigned int wall;
+    unsigned int sky;
+} t_color;
 
 typedef struct s_texture
 {
-	void	*imgN;
-	void	*imgS;
-	void	*imgE;
-	void	*imgW;
-
-	char	*data;
-	int		width;
-	int		height;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}	t_texture;
+    void    *imgN;
+    void    *imgS;
+    void    *imgE;
+    void    *imgW;
+    char    *data;
+    int     width;
+    int     height;
+    int     bpp;
+    int     size_line;
+    int     endian;
+} t_texture;
 
 typedef struct s_struct
 {
-	char	**map;
-	int		map_width;
-	int		map_height;
-
-	void	*mlx;
-	void	*win;
-
-	char	*path_N;
-	char	*path_E;
-	char	*path_W;
-	char	*path_S;
-
-	t_color	color;
-	void	*img;
-	char	*img_data;
-
-	int		bpp;
-	int		size_line;
-	int		endian;
-
-
-	int		full_screen;
-	
-}	t_struct;
+    char    **map;
+    int     map_width;
+    int     map_height;
+    void    *mlx;
+    void    *win;
+    char    *path_N;
+    char    *path_E;
+    char    *path_W;
+    char    *path_S;
+    t_color color;
+    void    *img;
+    char    *img_data;
+    int     bpp;
+    int     size_line;
+    int     endian;
+    int     full_screen;
+} t_struct;
 
 typedef struct s_context
 {
+    t_player *p;
+    t_struct *cube;
+    t_texture *texture;
+} t_context;
+
+/* Structure pour les calculs de raycasting */
+typedef struct s_ray_calc
+{
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	perp_wall_dist;
+	double	wall_x;
+}	t_ray_calc;
+
+/* Structure pour les données du rayon à dessiner */
+typedef struct s_ray_data
+{
+	t_texture	*texture;
+	double		wall_x;
+	int			tex_y;
+}	t_ray_data;
+
+/* Structure pour les paramètres de texture */
+typedef struct s_tex_params
+{
+	int			y;
+	int			start;
+	int			height;
+	t_texture	*texture;
+	int			*tex_y;
+}	t_tex_params;
+
+/* Structure pour les paramètres de raycasting */
+typedef struct s_raycast_params
+{
 	t_player	*p;
 	t_struct	*cube;
-	t_texture *texture;
-}	t_context;
+	double		rx;
+	double		ry;
+	double		*wall_x;
+}	t_raycast_params;
+
+/* Structure pour les données de ligne verticale */
+typedef struct s_line_data
+{
+	int			start;
+	int			end;
+	int			y;
+	int			height;
+	int			tex_x;
+	t_ray_data	*ray;
+}	t_line_data;
+
+/* Structure pour la direction du rayon */
+typedef struct s_ray_dir
+{
+	double	rx;
+	double	ry;
+}	t_ray_dir;
 
 /* main.c */
 void	fill_background(t_struct *cube);
@@ -155,11 +208,6 @@ int				handle_keypress(int keycode, void *param);
 void	render_scene(t_player *bob, t_struct *cube, t_texture *texture);
 int				handle_movement(int keycode, t_player *p, t_struct *cube);
 
-/* raycasting.c */
-void			draw_pixel(t_struct *cube, int x, int y, unsigned int color);
-void draw_vertical_line(t_struct *cube, int x, int height, t_texture *texture, double wall_x);
-void	raycast_column(t_player *p, t_struct *cube, int screen_x, t_texture *texture);
-
 /* mini_map.c */
 void			draw_minimap(t_player *p, t_struct *cube);
 void			draw_minimap_fullscreen(t_player *p, t_struct *cube);
@@ -171,5 +219,27 @@ void	draw_player_on_minimap(t_struct *cube);
 /* init_player.c */
 void			rotate_player(t_player *p, int keycode);
 void			init_player(t_player *p, char **map);
+
+/* raycasting.c */
+void	draw_pixel(t_struct *cube, int x, int y, unsigned int color);
+void	set_tex_x(int *tex_x, double wall_x, t_texture *texture);
+void	set_tex_y_params(t_tex_params *params);
+void	draw_v_line_part1(t_line_data *data);
+void	raycast_column(t_player *p, t_struct *cube, int screen_x, t_texture *texture);
+
+/* raycasting2.c */
+void	draw_v_line(t_struct *cube, int x, int height, t_ray_data *ray);
+void	init_step_x(t_ray_calc *calc, t_player *p, double rx);
+void	init_step_y(t_ray_calc *calc, t_player *p, double ry);
+void	set_step_and_side_dist(t_ray_calc *calc, t_player *p, t_ray_dir *dir);
+
+/* raycasting3.c */
+void	perform_dda_part1(t_ray_calc *calc);
+void	perform_dda(t_ray_calc *calc, t_struct *cube);
+void	calculate_wall_dist(t_ray_calc *calc, t_player *p, t_ray_dir *dir);
+int		wall_dist(t_raycast_params *params);
+void	init_ray_data(t_player *p, int screen_x, double *rx, double *ry);
+
+
 
 #endif

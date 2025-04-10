@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 03:19:12 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:23:49 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	draw_tile(t_struct *cube, int x, int y, int tile_size)
 {
 	int	color;
-	// t_minimap mini;
 
-	
 	if (cube->map[y][x] == '1')
 		color = 0xAAAAAA;
 	else if (cube->map[y][x] == '0')

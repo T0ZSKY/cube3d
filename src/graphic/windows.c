@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   windows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:08:10 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/09 22:39:04 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:26:08 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,21 @@ int	move_player_in_direction(t_player *p, t_struct *cube,
 	return (move_player(p, cube, new_x, new_y));
 }
 
-int handle_movement(int keycode, t_player *p, t_struct *cube)
+int	handle_movement(int keycode, t_player *p, t_struct *cube)
 {
-    double speed = p->is_running ? p->run_speed : p->speed;
+	double	speed;
 
-    if (keycode == KEY_W)
-        return (move_player_in_direction(p, cube, p->dir_x * speed, p->dir_y * speed));
-    if (keycode == KEY_S)
-        return (move_player_in_direction(p, cube, -p->dir_x * speed, -p->dir_y * speed));
-    if (keycode == KEY_A)
-        return (move_player_in_direction(p, cube, -p->plane_x * speed, -p->plane_y * speed));
-    if (keycode == KEY_D)
-        return (move_player_in_direction(p, cube, p->plane_x * speed, p->plane_y * speed));
-
-    return (0);
+	if (p->is_running)
+		speed = p->run_speed;
+	else
+		speed = p->speed;
+	if (keycode == KEY_W)
+		return (move_player_in_direction(p, cube, p->dir_x * speed, p->dir_y * speed));
+	if (keycode == KEY_S)
+		return (move_player_in_direction(p, cube, -p->dir_x * speed, -p->dir_y * speed));
+	if (keycode == KEY_A)
+		return (move_player_in_direction(p, cube, -p->plane_x * speed, -p->plane_y * speed));
+	if (keycode == KEY_D)
+		return (move_player_in_direction(p, cube, p->plane_x * speed, p->plane_y * speed));
+	return (0);
 }
-
