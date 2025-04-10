@@ -4,4 +4,5 @@
 .DS_Store
 .vscode
 obj
+cub3d
 include/.DS_Store
