@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 00:56:20 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:34:26 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,6 @@ void	draw_minimap_fullscreen(t_player *p, t_struct *cube)
 	draw_player(p, cube, tile_size);
 }
 
-void ft_print_map_int(char **map)
-{
-	int x;
-
-	x = 0;
-	while (map[x])
-	{
-		printf("%s", map[x]);
-		x++;
-	}
-}
-
 void	ft_fog_init(t_struct *cube)
 {
 	int	y;
@@ -115,7 +103,6 @@ void	ft_fog_init(t_struct *cube)
 		}
 		a++;
 	}
-	ft_print_map_int(cube->fog_map);
 }
 
 void	update_fog_map(t_struct *cube, t_player *p)
