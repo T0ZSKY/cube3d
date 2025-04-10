@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:08:18 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/10 22:30:30 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:10:31 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	key_press(int keycode, t_context *ctx)
 		ctx->cube->keys.left = 1;
 	if (keycode == KEY_RIGHT)
 		ctx->cube->keys.right = 1;
+	if (keycode == KEY_TAB)
+		ctx->cube->full_screen = 1;
 	if (keycode == KEY_ESC)
 		exit(0);
 	return (0);
@@ -66,6 +68,8 @@ int	key_release(int keycode, t_context *ctx)
 		ctx->cube->keys.left = 0;
 	if (keycode == KEY_RIGHT)
 		ctx->cube->keys.right = 0;
+	if (keycode == KEY_TAB)
+		ctx->cube->full_screen = 0;
 	return (0);
 }
 

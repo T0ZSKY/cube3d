@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:43:05 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 22:35:42 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:00:30 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	initialize_player_and_window(t_player *bob, t_struct *cube)
 {
-	init_player(bob, cube->map);
+	if (init_player(bob, cube->map) == 0)
+		return (ft_error("error player is not here\n"), 1);
 	ft_create_windows(cube);
 	if (!cube->mlx || !cube->win)
 		return (ft_error("mlx ou window NULL\n"), 1);
@@ -22,7 +23,7 @@ int	initialize_player_and_window(t_player *bob, t_struct *cube)
 	return (0);
 }
 
-void	init_player(t_player *p, char **map)
+int	init_player(t_player *p, char **map)
 {
 	int	y;
 	int	x;
@@ -70,8 +71,9 @@ void	init_player(t_player *p, char **map)
 					p->plane_y = -FOV;
 				}
 				map[y][x] = '0';
-				return ;
+				return 1;
 			}
 		}
 	}
+	return (0);
 }
