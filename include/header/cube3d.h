@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 22:41:42 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:01:03 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void	draw_minimap_tile(t_player *p, t_struct *cube, double angle, int x, int y);
 void	draw_player_on_minimap(t_struct *cube);
 
 /* init_player.c */
-void			init_player(t_player *p, char **map);
+int         init_player(t_player *p, char **map);
 int			initialize_player_and_window(t_player *bob, t_struct *cube);
 
 /* raycasting.c */
