@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 01:26:58 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:55:42 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-# define FOV 0.86 
+# define FOV 0.86
 # define ROT_SPEED 0.04
 # define SPEED 0.5
 # define MIN_DIST 0.1
@@ -54,72 +54,73 @@ typedef struct s_keys
 
 typedef struct s_minimap
 {
-    int color;
-    int tile_size;
-    int start_x;
-    int start_y;
+	int color;
+	int tile_size;
+	int start_x;
+	int start_y;
 } t_minimap;
 
 typedef struct s_player
 {
-    double x;          // Position X du joueur
-    double y;          // Position Y du joueur
-    double dir_x;      // Direction X
-    double dir_y;      // Direction Y
-    double plane_x;    // Plan X
-    double speed;      // Vitesse normale
-    double run_speed;  // Vitesse en mode course
-    int is_running;    // Indicateur de mode course
-    double plane_y;    // Plan Y
+	double x;          // Position X du joueur
+	double y;          // Position Y du joueur
+	double dir_x;      // Direction X
+	double dir_y;      // Direction Y
+	double plane_x;    // Plan X
+	double speed;      // Vitesse normale
+	double run_speed;  // Vitesse en mode course
+	int is_running;    // Indicateur de mode course
+	double plane_y;    // Plan Y
 } t_player;
 
 typedef struct s_color
 {
-    unsigned int floor;
-    unsigned int wall;
-    unsigned int sky;
+	unsigned int floor;
+	unsigned int wall;
+	unsigned int sky;
 } t_color;
 
 typedef struct s_texture
 {
-    void    *imgN;
-    void    *imgS;
-    void    *imgE;
-    void    *imgW;
-    char    *data;
-    int     width;
-    int     height;
-    int     bpp;
-    int     size_line;
-    int     endian;
+	void    *imgN;
+	void    *imgS;
+	void    *imgE;
+	void    *imgW;
+	char    *data;
+	int     width;
+	int     height;
+	int     bpp;
+	int     size_line;
+	int     endian;
 } t_texture;
 
 typedef struct s_struct
 {
-    char    **map;
-    int     map_width;
-    int     map_height;
-    void    *mlx;
-    void    *win;
-    char    *path_N;
-    char    *path_E;
-    char    *path_W;
-    char    *path_S;
+	char    **map;
+	int     map_width;
+	int     map_height;
+	void    *mlx;
+	void    *win;
+	char    *path_N;
+	char    *path_E;
+	char    *path_W;
+	char    *path_S;
 	t_keys	keys;
-    t_color color;
-    void    *img;
-    char    *img_data;
-    int     bpp;
-    int     size_line;
-    int     endian;
-    int     full_screen;
+	t_color color;
+	char     **fog_map;
+	void    *img;
+	char    *img_data;
+	int     bpp;
+	int     size_line;
+	int     endian;
+	int     full_screen;
 } t_struct;
 
 typedef struct s_context
 {
-    t_player *p;
-    t_struct *cube;
-    t_texture *texture;
+	t_player *p;
+	t_struct *cube;
+	t_texture *texture;
 } t_context;
 
 /* Structure pour les calculs de raycasting */
@@ -231,6 +232,9 @@ void			draw_player(t_player *p, t_struct *cube, int tile_size);
 int	get_minimap_color(t_player *p, t_struct *cube, double rotated_x, double rotated_y);
 void	draw_minimap_tile(t_player *p, t_struct *cube, double angle, int x, int y);
 void	draw_player_on_minimap(t_struct *cube);
+void ft_fog_init(t_struct *cube);
+void	update_fog_map(t_struct *cube, t_player *p);
+void	draw_minimap_area(t_player *p, t_struct *cube, double angle);
 
 /* init_player.c */
 int         init_player(t_player *p, char **map);

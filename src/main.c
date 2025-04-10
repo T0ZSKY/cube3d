@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 01:29:02 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:33:40 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	handle_movement_loop(t_struct *cube, t_player *p)
 	speed = SPEED;
 	rot_speed = ROT_SPEED;
 	if (cube->keys.w)
-		move_player_in_direction(p, cube, p->dir_x * (speed), p->dir_y * speed);
+		move_player_in_direction(p, cube,
+			p->dir_x * (speed), p->dir_y * speed);
 	if (cube->keys.s)
 		move_player_in_direction(p, cube, -p->dir_x * (speed), -p->dir_y * speed);
 	if (cube->keys.a)
@@ -70,4 +71,3 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(cube->mlx, game_loop, ctx);
 	mlx_loop(cube->mlx);
 }
-

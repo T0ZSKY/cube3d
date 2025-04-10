@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:43:05 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 01:30:12 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:34:02 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	initialize_player_and_window(t_player *bob, t_struct *cube)
 	ft_create_windows(cube);
 	if (!cube->mlx || !cube->win)
 		return (ft_error("mlx ou window NULL\n"), 1);
+	ft_fog_init(cube);
 	printf("MLX OK, WIN OK\n");
 	return (0);
 }
