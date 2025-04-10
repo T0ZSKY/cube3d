@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:08:18 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/10 23:10:31 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:31:07 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	move_player(t_player *p, t_struct *cube, double new_x, double new_y)
 {
-	if (cube->map[(int)new_y] && cube->map[(int)new_y][(int)new_x] != '1')
+	if (cube->map[(int)new_y] && 
+		cube->map[(int)(new_y + MIN_DIST)][(int)new_x] != '1' &&
+		cube->map[(int)new_y][(int)(new_x + MIN_DIST)] != '1' &&
+		cube->map[(int)(new_y - MIN_DIST)][(int)new_x] != '1' &&
+		cube->map[(int)new_y][(int)(new_x - MIN_DIST)] != '1')
 	{
 		p->x = new_x;
 		p->y = new_y;

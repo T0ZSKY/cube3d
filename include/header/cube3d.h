@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 00:01:03 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:26:58 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define FOV 0.86 
 # define ROT_SPEED 0.04
 # define SPEED 0.5
+# define MIN_DIST 0.1
 
 #define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels

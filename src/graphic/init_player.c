@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:43:05 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 00:00:30 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:30:12 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	init_player(t_player *p, char **map)
 					p->plane_y = -FOV;
 				}
 				map[y][x] = '0';
-				return 1;
+				return (1);
 			}
 		}
 	}

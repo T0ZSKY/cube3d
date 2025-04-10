@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:58:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/10 22:42:04 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 01:29:02 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	handle_movement_loop(t_struct *cube, t_player *p)
 	if (cube->keys.w)
 		move_player_in_direction(p, cube, p->dir_x * (speed), p->dir_y * speed);
 	if (cube->keys.s)
-		move_player_in_direction(p, cube, -p->dir_x * (speed * 0.5), -p->dir_y * speed);
+		move_player_in_direction(p, cube, -p->dir_x * (speed), -p->dir_y * speed);
 	if (cube->keys.a)
-		move_player_in_direction(p, cube, -p->plane_x * (speed * 0.5), -p->plane_y * speed);
+		move_player_in_direction(p, cube, -p->plane_x * (speed), -p->plane_y * speed);
 	if (cube->keys.d)
-		move_player_in_direction(p, cube, p->plane_x * (speed * 0.5), p->plane_y * speed);
+		move_player_in_direction(p, cube, p->plane_x * (speed), p->plane_y * speed);
 	if (cube->keys.left)
 		rotate_player(p, -rot_speed);
 	if (cube->keys.right)
