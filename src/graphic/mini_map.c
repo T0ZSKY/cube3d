@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:07:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 01:55:01 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:06:52 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	update_fog_map(t_struct *cube, t_player *p)
 	int	wx;
 	int	wy;
 
-	radius = 5;
+	radius = MINIMAP_FOG_RADIUS;
 	px = (int)p->x;
 	py = (int)p->y;
 	y = -radius;

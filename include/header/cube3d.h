@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:59:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/04/11 00:55:42 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:06:15 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 #define MINIMAP_SCALE 10
 #define MINIMAP_RADIUS 120 // rayon de la minimap en pixels
-
+#define MINIMAP_FOG_RADIUS 3
 
 # define KEY_ESC    65307
 # define KEY_LEFT   65361
